@@ -1,0 +1,2 @@
+export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+export const LOGO_URL = "https://media.istockphoto.com/id/1250223965/vector/food-point-logo-design.jpg?s=612x612&w=0&k=20&c=rkoSdmACSBxkXs6RTybTxyW1Ly87I6bugiXbZrFDJpM="
