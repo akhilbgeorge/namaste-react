@@ -1,6 +1,8 @@
 import ResCard from "./ResCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router";
+import useShowOnlineStatus from "../utils/useShowOnlineStatus";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -24,6 +26,12 @@ const Body = () => {
       json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
   };
+
+  const onlineStatus = useShowOnlineStatus();
+
+  if(!onlineStatus){
+    return <h1>"Looks like you're offline!. Please check your internet connection"</h1>
+  }
 
   return allRestaurants.length === 0 ? (
     <Shimmer />
@@ -80,7 +88,12 @@ const Body = () => {
       </div>
       <div className="res-card-container">
         {displayedRestaurants.map((restaurant) => (
-          <ResCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={"restaurants/" + restaurant.info.id}
+          >
+            <ResCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
