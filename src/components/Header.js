@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
+import useShowOnlineStatus from "../utils/useShowOnlineStatus";
 
 const Header = () => {
   const [logInOutBtn, setLogInOutBtn] = useState("Login");
+
+  const onlineStatus = useShowOnlineStatus();
 
   return (
     <div className="header-container">
       <img className="logo" src={LOGO_URL} alt="brand-logo" />
       <ul>
+        <li>
+          Online Status: {onlineStatus ? "🟢" : "🔴"}
+        </li>
         <li>
           <Link to="/">Home</Link>
         </li>
