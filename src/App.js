@@ -6,16 +6,26 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import ResMenu from "./components/ResMenu";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import UserContext from "./utils/UserContext";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    const data = {
+      name: "Akhil B George",
+    };
+    setUserInfo(data.name);
+  }, []);
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ userName: userInfo, setUserInfo }}>
+      <div>
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
