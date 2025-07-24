@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useShowOnlineStatus from "../utils/useShowOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [logInOutBtn, setLogInOutBtn] = useState("Login");
 
   const onlineStatus = useShowOnlineStatus();
 
+  const {userName} = useContext(UserContext);
+
   return (
-    <div className="header-container">
-      <img className="logo" src={LOGO_URL} alt="brand-logo" />
-      <ul>
-        <li>
-          Online Status: {onlineStatus ? "🟢" : "🔴"}
-        </li>
+    <div className="flex px-10 justify-between shadow-md">
+      <div>
+        <img className="w-24" src={LOGO_URL} alt="brand-logo" />
+      </div>
+      <ul className="flex items-center gap-8 mr-10">
+        <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -35,6 +38,9 @@ const Header = () => {
         >
           {logInOutBtn}
         </button>
+        <li className="font-bold">
+          {userName}
+        </li>
       </ul>
     </div>
   );
