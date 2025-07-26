@@ -20,7 +20,7 @@ const ResMenuCategory = ({ data, showList, setCatIndex }) => {
       </div>
       {showList &&
         data?.card?.card?.itemCards?.map((dish) => (
-          <ResMenuCategoryList key={dish.card.info.id} data={dish} />
+          <ResMenuCategoryList key={dish.card.info.id} data={dish} showAddButton={true} />
         ))}
     </div>
   );
