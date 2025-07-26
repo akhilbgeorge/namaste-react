@@ -3,18 +3,23 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useShowOnlineStatus from "../utils/useShowOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [logInOutBtn, setLogInOutBtn] = useState("Login");
 
   const onlineStatus = useShowOnlineStatus();
 
-  const {userName} = useContext(UserContext);
+  const { userName } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex px-10 justify-between shadow-md">
       <div>
-        <img className="w-24" src={LOGO_URL} alt="brand-logo" />
+        <Link to="/">
+          <img className="w-24" src={LOGO_URL} alt="brand-logo" />
+        </Link>
       </div>
       <ul className="flex items-center gap-8 mr-10">
         <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
@@ -30,7 +35,9 @@ const Header = () => {
         <li>
           <Link to="grocery">Grocery</Link>
         </li>
-        <li>Cart</li>
+        <li className="font-bold">
+          <Link to="cart">Cart - {cartItems.length} items</Link>
+        </li>
         <button
           onClick={() => {
             setLogInOutBtn(logInOutBtn === "Login" ? "Logout" : "Login");
@@ -38,9 +45,7 @@ const Header = () => {
         >
           {logInOutBtn}
         </button>
-        <li className="font-bold">
-          {userName}
-        </li>
+        <li className="font-bold">{userName}</li>
       </ul>
     </div>
   );
